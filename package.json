@@ -1,19 +1,52 @@
 {
-  "name": "vue-apollo-monorepo",
-  "version": "3.0.0",
-  "workspaces": [
-    "packages/*"
+  "name": "@vue/apollo-composable",
+  "version": "4.0.0-alpha.8",
+  "description": "Apollo GraphQL for Vue Composition API",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Akryum/vue-apollo.git"
+  },
+  "keywords": [
+    "vue",
+    "apollo",
+    "graphql",
+    "composition"
   ],
-  "private": true,
+  "author": "Guillaume Chau <guillaume.b.chau@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Akryum/vue-apollo/issues"
+  },
+  "homepage": "https://github.com/Akryum/vue-apollo#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
-    "build": "lerna run build --concurrency 1 --scope \"{vue-apollo,@vue/apollo}*\"",
-    "test": "lerna run test --concurrency 1"
+    "dev": "yarn build --watch",
+    "build": "tsc --outDir dist -d",
+    "prepublishOnly": "yarn test && yarn build",
+    "test": "yarn test:types",
+    "test:types": "tsc -p tests/types/"
+  },
+  "dependencies": {
+    "throttle-debounce": "^2.1.0"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": "^0.6.1",
+    "apollo-client": "^2.0.0",
+    "apollo-link": "^1.0.0",
+    "graphql": "^14.5.8",
+    "graphql-tag": "^2.0.0",
+    "vue": "^2.6.10"
   },
   "devDependencies": {
-    "core-js": "^3.4.1",
-    "lerna": "^3.18.4"
-  },
-  "resolutions": {
-    "eslint-scope": "^5.0.0"
+    "@types/throttle-debounce": "^2.1.0",
+    "@vue/composition-api": "^0.6.1",
+    "typescript": "^3.7.2"
   }
 }
